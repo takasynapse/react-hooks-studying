@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+// ReactからcreateContextとuseStateをimport
+import React, {createContext, useState} from 'react'
 import './App.css';
+import Context from './ContextSample/ContextA'
+
+//createContextを使ってUserContextとHobbyContextを作成
+export const UserContext = createContext()
+export const HobbyContext = createContext()
 
 function App() {
+//useStateを使ってuserを作成
+  const [user, setUser] = useState({
+    name: 'たかし',
+    age: '23'
+  })
+//useStateを使ってhobbyを作成
+  const [hobby, setHobby] = useState('サイクリング')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+    {/* //userContext。Providerを作成、valueにはuserをセット */}
+      <UserContext.Provider value={user}>
+{/* //HobbyContext.Providerを作成、valueにはhobbyをセット */}
+        <HobbyContext.Provider value={hobby}>
+          <Context/>
+        </HobbyContext.Provider>
+      </UserContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
